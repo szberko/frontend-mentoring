@@ -1,0 +1,116 @@
+body {
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  header {
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/header.jpg");
+    color: white;
+    padding: 10px 0;
+
+    #header-content {
+      max-width: 900px;
+      margin: 0 auto;
+
+      .header-content__search-input {
+        width: 100%;
+        display: flex;
+
+        input {
+          flex-grow: 1;
+          width: fit-content;
+          box-sizing: border-box;
+          border: none;
+          border-bottom: 2px solid red;
+          padding: 15px 13px;
+          background-color: black;
+          color: white;
+          font-size: 15px;
+          background: content("↵");
+        }
+        span {
+          flex-grow: 0;
+          background-color: black;
+          color: white;
+          padding: 15px 13px;
+          border: none;
+          font-size: 15px;
+          border-bottom: 2px solid red;
+        }
+      }
+
+      .header-content__search-customization{
+        margin: 10px 0px;
+        display: flex;
+
+        .header-content__search-btn{
+          margin-left: auto;
+
+          input[type=submit]{
+            color: white;
+            background-color: red;
+            border: none;
+            padding: 3px 10px;
+          }
+        }
+
+        input[type=radio] {
+          position: absolute;
+          visibility: hidden;
+          display: none;
+        }
+
+        label {
+          background-color: grey;
+          padding: 3px 10px;
+          margin: 0px 10px;
+          cursor: pointer;
+        }
+
+        input[type=radio]:checked + label {
+          background-color: red;
+        }
+      }
+    }
+  }
+
+  section.movies-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .movie {
+
+      .movie__pic {
+        max-width: 300px;
+        max-height: 450px;
+      }
+
+      .movie__title-and-year {
+        display: flex;
+
+        .movie__title {
+          text-transform: uppercase;
+        }
+
+        .movie__year {
+          border: 1px solid black;
+          margin-left: auto;
+        }
+      }
+
+      .movie__description{
+        color: grey;
+      }
+    }
+  }
+
+  footer {
+    background-color: grey;
+  }
+
+  .logo {
+    color: red;
+  }
+}
