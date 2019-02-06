@@ -10,6 +10,7 @@ body {
   header {
     background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url("../img/header.jpg");
     color: $main-text-color;
+    padding-top: 10px;
 
     .header-content {
       max-width: 900px;
