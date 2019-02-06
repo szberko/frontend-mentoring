@@ -10,11 +10,11 @@
   </head>
   <body>
     <header>
-      <div class="header-content">
+      <section class="header-content">
         <div class="header-content__logo logo">netflixroulette</div>
         <div class="header-content__search-container">
-          <p>FIND YOUR MOVIE</p>
-          <form action="">
+          <h1>FIND YOUR MOVIE</h1>
+          <form>
             <div class="header-content__search-input">
               <input type="text" placeholder="Movie title...">
               <span>↵</span>
@@ -33,20 +33,22 @@
             </div>
           </form>
         </div> 
-      </div>
-    </header>
-    <section class="sorting">
-      <div class="sorting-container">
-        <div class="sorting__results">7 movies found</div>
-        <div class="sorting__sortby">
-          <span>Sort by</span>
-          <span class="sorting__release-date">release date</span>
-          <span class="sorting__release-date">rating</span>
+      </section>
+      <section class="sorting">
+        <div class="sorting-container">
+          <div class="sorting__results">7 movies found</div>
+          <div class="sorting__sortby">
+            <span>Sort by</span>
+            <input id="sortby-releasedate" class="sorting__release-date" name="sortby" type="radio" value="release-date" checked>
+            <label for="sortby-releasedate">release date</label>
+            <input id="sortby-rating" class="sorting__rating" name="sortby" type="radio" value="rating">
+            <label for="sortby-rating">rating</label>
+          </div>
         </div>
-      </div>
-    </section>
-    <section class="movies-container">
-      <div class="movie">
+      </section>
+    </header>
+    <main class="movies-container">
+      <article class="movie">
         <img class="movie__pic" src="img/kill-bill-vol2.jpg" alt="Kill Bill Vol.2 picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Kill Bill: Vol 2</span>
@@ -55,8 +57,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/kill-bill-vol1.jpg" alt="Kill Bill Vol.1 picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Kill Bill: Vol 1</span>
@@ -65,8 +67,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/pulp-fiction.jpg" alt="Pulp Fiction picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Pulp Fiction</span>
@@ -75,8 +77,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/jackie-brown.jpg" alt="Jackie Brown picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Jackie Brown</span>
@@ -85,8 +87,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/reservoir-dogs.jpg" alt="Reservoir Dogs picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Reservoir Dogs</span>
@@ -95,8 +97,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/four-rooms.jpg" alt="Four Rooms picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Four Rooms</span>
@@ -105,8 +107,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/django.jpg" alt="Django Unchained picture">
         <div class="movie__title-and-year">
           <span class="movie__title">Django Unchained</span>
@@ -115,9 +117,8 @@
         <div class="movie__description">
           movie description
         </div>
-      </div>
-    </div>
-    </section>
+      </article>
+    </main>
     <footer>
       <div class="footer-container">
         <div class="footer-content__logo logo">netflixroulette</div>
