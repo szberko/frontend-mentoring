@@ -9,40 +9,38 @@
     <title>Netflix search page</title>
   </head>
   <body>
-    <header>
-      <section class="header-content">
-        <div class="header-content__logo logo">netflixroulette</div>
-        <div class="header-content__search-container">
-          <h1>FIND YOUR MOVIE</h1>
-          <form>
-            <div class="header-content__search-input">
-              <input type="text" placeholder="Movie title...">
-              <span>↵</span>
+    <header class="header">
+      <section class="header__logo logo">netflixroulette</section>
+      <section class="search">
+        <h1>FIND YOUR MOVIE</h1>
+        <form>
+          <div class="search__input">
+            <input class="search__field" type="text" placeholder="Movie title...">
+            <span class="search__symbol">↵</span>
+          </div>
+          <div class="search__filter">
+            <div class="search__by">
+                <span>SEARCH BY</span>
+                <input class="search__option" type="radio" id="searchby-title" name="searchby" value="title" checked>
+                <label class="search__option-label" for="searchby-title">TITLE</label>
+                <input class="search__option" type="radio" id="searchby-director" name="searchby" value="director">
+                <label class="search__option-label" for="searchby-director">DIRECTOR</label>
             </div>
-            <div class="header-content__search-customization">
-              <div class="header-content__search-by">
-                  <span>SEARCH BY</span>
-                  <input type="radio" id="searchby-title" name="searchby" value="title" checked>
-                  <label for="searchby-title">TITLE</label>
-                  <input type="radio" id="searchby-director" name="searchby" value="director">
-                  <label for="searchby-director">DIRECTOR</label>
-              </div>
-              <div class="header-content__search-btn">
-                  <input type="submit" value="SEARCH">
-              </div>
+            <div class="search__btn">
+                <input class="search__submit" type="submit" value="SEARCH">
             </div>
-          </form>
-        </div> 
+          </div>
+        </form>
       </section>
       <section class="sorting">
-        <div class="sorting-container">
+        <div class="sorting__container">
           <div class="sorting__results">7 movies found</div>
           <div class="sorting__sortby">
             <span>Sort by</span>
-            <input id="sortby-releasedate" class="sorting__release-date" name="sortby" type="radio" value="release-date" checked>
-            <label for="sortby-releasedate">release date</label>
-            <input id="sortby-rating" class="sorting__rating" name="sortby" type="radio" value="rating">
-            <label for="sortby-rating">rating</label>
+            <input class="sorting__option" id="sortby-releasedate" class="sorting__release-date" name="sortby" type="radio" value="release-date" checked>
+            <label class="sorting__option-label" for="sortby-releasedate">release date</label>
+            <input class="sorting__option" id="sortby-rating" class="sorting__rating" name="sortby" type="radio" value="rating">
+            <label class="sorting__option-label" for="sortby-rating">rating</label>
           </div>
         </div>
       </section>
@@ -119,9 +117,9 @@
         </div>
       </article>
     </main>
-    <footer>
-      <div class="footer-container">
-        <div class="footer-content__logo logo">netflixroulette</div>
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__logo logo">netflixroulette</div>
       </div>
     </footer>
   </body>

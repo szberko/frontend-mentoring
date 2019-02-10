@@ -3,164 +3,179 @@ $inactive-color: #3c3c3c;
 $nav-color: #f5f5f5;
 $main-text-color: #ffffff;
 
+%narrow-width{
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+%wide-width{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 body {
-  margin: 0px;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
 
-  header {
-    background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url("../img/header.jpg");
-    color: $main-text-color;
-    padding-top: 10px;
+.header {
+  background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url("../img/header.jpg");
+  color: $main-text-color;
+  padding-top: 10px;
 
-    .header-content {
-      max-width: 900px;
-      margin: 0 auto;
-
-      .header-content__search-input {
-        width: 100%;
-        display: flex;
-
-        input {
-          flex-grow: 1;
-          width: fit-content;
-          box-sizing: border-box;
-          border: none;
-          border-bottom: 2px solid $active-color;
-          padding: 15px 13px;
-          background-color: black;
-          color: $main-text-color;
-          font-size: 15px;
-          background: content("↵");
-        }
-        span {
-          flex-grow: 0;
-          background-color: black;
-          color: $main-text-color;
-          padding: 15px 13px;
-          border: none;
-          font-size: 15px;
-          border-bottom: 2px solid $active-color;
-        }
-      }
-
-      .header-content__search-container{
-        margin: 40px 0;
-
-        .header-content__search-customization{
-          margin-top: 20px;
-          display: flex;
-  
-          .header-content__search-btn{
-            margin-left: auto;
-  
-            input[type=submit]{
-              color: $main-text-color;
-              background-color: $active-color;
-              border: none;
-              font-size: 15px;
-              padding: 10px 40px;
-            }
-          }
-  
-          input[type=radio] {
-            position: absolute;
-            visibility: hidden;
-            display: none;
-          }
-  
-          label {
-            background-color: $inactive-color;
-            padding: 5px 30px;
-            margin: 0px 10px;
-            cursor: pointer;
-          }
-  
-          input[type=radio]:checked + label {
-            background-color: $active-color;
-          }
-        }
-      }
-    }
+  #{&}__logo{
+    @extend %narrow-width;
   }
+}
 
-  section.sorting{
-    background-color: $nav-color;
-    padding: 10px 0;
-    color: black;
 
-    .sorting-container{
-      display: flex;
-      max-width: 900px;
-      margin: 0 auto;
-  
-      .sorting__sortby{
-        margin-left: auto;
+.search {
+  @extend %narrow-width;
+  margin-top: 40px;
+  margin-bottom: 40px;
 
-        *{
-          margin: 0 10px;
-        }
-
-        input[type=radio] {
-          position: absolute;
-          visibility: hidden;
-          display: none;
-        }
-
-        label{
-          cursor: pointer;
-        }
-
-        input[type=radio]:checked + label {
-          color: $active-color;
-        }
-      }
-    }
-  }
-
-  main.movies-container {
-    max-width: 1100px;
-    margin: 50px auto;
+  @at-root #{&}__input {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  }
 
-    .movie {
+  @at-root #{&}__field {
+    flex-grow: 1;
+    width: fit-content;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid $active-color;
+    padding: 15px 13px;
+    background-color: black;
+    color: $main-text-color;
+    font-size: 15px;
+    background: content("↵");
+  }
+  
+  @at-root #{&}__symbol {
+    flex-grow: 0;
+    background-color: black;
+    color: $main-text-color;
+    padding: 15px 13px;
+    border: none;
+    font-size: 15px;
+    border-bottom: 2px solid $active-color;
+  }
+    
 
-      .movie__pic {
-        max-width: 300px;
-        max-height: 450px;
-      }
+  @at-root #{&}__filter{
+    margin-top: 20px;
+    display: flex;
+  }
 
-      .movie__title-and-year {
-        display: flex;
+  @at-root #{&}__btn{
+    margin-left: auto;
+  }
 
-        .movie__title {
-          text-transform: uppercase;
-        }
+  @at-root #{&}__submit{
+    color: $main-text-color;
+    background-color: $active-color;
+    border: none;
+    font-size: 15px;
+    padding: 10px 40px;
+  }
 
-        .movie__year {
-          border: 1px solid black;
-          margin-left: auto;
-        }
-      }
+  @at-root #{&}__option {
+    position: absolute;
+    visibility: hidden;
+    display: none;
 
-      .movie__description{
-        color: grey;
-      }
+    &:checked + .search__option-label {
+      background-color: $active-color;
     }
   }
 
-  footer {
+  @at-root #{&}__option-label {
     background-color: $inactive-color;
+    padding: 5px 30px;
+    margin: 0px 10px;
+    cursor: pointer;
+  }
+}
 
-    .footer-container{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px 0;
+.sorting {
+  background-color: $nav-color;
+  padding: 10px 0;
+  color: #000;
+
+  @at-root #{&}__container {
+    @extend %narrow-width;
+    display: flex;
+  }
+
+  @at-root #{&}__sortby {
+    margin-left: auto;
+
+    > * {
+      margin: 0 10px;
     }
   }
 
-  .logo {
-    color: $active-color;
+  @at-root #{&}__option{
+    position: absolute;
+    visibility: hidden;
+    display: none;
+
+    &:checked + .sorting__option-label{
+      color: $active-color;
+    }
   }
+
+  @at-root #{&}__option-label{
+    cursor: pointer;
+  }
+}
+
+.movies-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.movie {
+  @at-root #{&}__pic {
+    max-width: 300px;
+    max-height: 450px;
+  }
+
+  @at-root #{&}__title-and-year {
+    display: flex;
+  }
+
+  @at-root #{&}__title {
+    text-transform: uppercase;
+  }
+
+  @at-root #{&}__year {
+    border: 1px solid black;
+    margin-left: auto;
+  }
+
+  @at-root #{&}__description{
+    color: grey;
+  }
+}
+
+.footer {
+  background-color: $inactive-color;
+
+  @at-root #{&}__container{
+    @extend %wide-width;
+    padding: 20px 0;
+  }
+
+  #{&}__logo{
+    @extend %wide-width;
+  }
+}
+
+.logo {
+  color: $active-color;
 }
