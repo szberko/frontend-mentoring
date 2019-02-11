@@ -141,6 +141,8 @@ body {
 }
 
 .movie {
+  margin: 20px 0;
+
   @at-root #{&}__pic {
     max-width: 300px;
     max-height: 450px;
