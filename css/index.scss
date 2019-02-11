@@ -7,6 +7,10 @@ $main-text-color: #fff;
   cursor: pointer;
 }
 
+%uppercase{
+  text-transform: uppercase;
+}
+
 .narrow-width{
   max-width: 900px;
 }
@@ -147,7 +151,7 @@ body {
   }
 
   @at-root #{&}__title {
-    text-transform: uppercase;
+    @extend %uppercase;
   }
 
   @at-root #{&}__year {
