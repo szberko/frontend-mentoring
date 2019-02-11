@@ -83,7 +83,7 @@ body {
     visibility: hidden;
     display: none;
 
-    &:checked + .search__option-label {
+    &:checked + label {
       background-color: $active-color;
     }
   }
@@ -118,7 +118,7 @@ body {
     visibility: hidden;
     display: none;
 
-    &:checked + .sorting__option-label{
+    &:checked + label{
       color: $active-color;
     }
   }
@@ -151,7 +151,7 @@ body {
   }
 
   @at-root #{&}__year {
-    border: 1px solid black;
+    border: 1px solid #000;
     margin-left: auto;
   }
 
