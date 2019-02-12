@@ -1,0 +1,7 @@
+.footer {
+    background-color: $inactive-color;
+  
+    @at-root &__container{
+      padding: 20px 0;
+    }
+  }
