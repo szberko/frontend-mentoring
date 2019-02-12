@@ -1,7 +1,7 @@
 .footer {
     background-color: $inactive-color;
   
-    @at-root &__container{
+    @at-root &__logo{
       padding: 20px 0;
     }
   }

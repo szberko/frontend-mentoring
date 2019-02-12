@@ -3,11 +3,11 @@
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .movie {
-  margin: 20px 0;
+  margin: 20px 5px;
 
   @at-root &__pic {
       max-width: 300px;
@@ -25,5 +25,16 @@
 
   @at-root &__description{
       color: #808080;
+  }
+}
+
+@supports (display: flex){
+  @media screen and (max-width: 930px) {
+    .movies-container {
+      justify-content: space-around;
+    }
+    .movie {
+      flex-basis: 30%;
+    }
   }
 }

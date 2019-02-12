@@ -82,3 +82,35 @@
     color: $active-color;
   }
 }
+
+@supports (display: flex){
+  @media screen and (max-width: 620px) {
+    .search {
+      @at-root &__filter{
+        margin-top: 20px;
+        flex-direction: column;
+      }
+
+      @at-root &__by{
+        margin: 20px auto;
+      }
+    
+      @at-root &__btn{
+        margin: 0 auto;
+      }
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    .search {
+      @at-root &__by {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @at-root &__title, &__option-label {
+        margin: 3px 0;
+      }
+    }
+  }
+}
