@@ -23,16 +23,15 @@
   display: none;
 }
 
-@supports (display: flex){
-  @media screen and (max-width: 1120px) {
-    .wide-width {
-      padding: 0 20px;
-    }
-  }
 
-  @media screen and (max-width: 930px) {
-    .narrow-width {
-      padding: 0 20px;
-    }
+@media screen and (max-width: 1120px) {
+  .wide-width {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .narrow-width {
+    padding: 0 20px;
   }
 }

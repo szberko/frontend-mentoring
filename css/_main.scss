@@ -10,8 +10,8 @@
   margin: 20px 5px;
 
   @at-root &__pic {
-      max-width: 300px;
-      max-height: 450px;
+      width: 300px;
+      height: 450px;
   }
 
   @at-root &__title-and-year {
@@ -28,13 +28,30 @@
   }
 }
 
-@supports (display: flex){
-  @media screen and (max-width: 930px) {
-    .movies-container {
-      justify-content: space-around;
+
+@media screen and (max-width: 930px) {
+  .movies-container {
+    justify-content: space-around;
+  }
+  .movie {
+    flex-basis: 30%;
+
+    @at-root &__pic {
+      width: initial;
+      height: initial;
+      max-width: 300px;
+      max-height: 450px;
     }
-    .movie {
-      flex-basis: 30%;
-    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .movies-container {
+    justify-content: initial;
+  }
+
+  .movie {
+    margin: 0 auto;
+    padding: 10px;
   }
 }
