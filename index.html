@@ -9,118 +9,117 @@
     <title>Netflix search page</title>
   </head>
   <body>
-    <header>
-      <div class="header-content">
-        <div class="header-content__logo logo">netflixroulette</div>
-        <div class="header-content__search-container">
-          <p>FIND YOUR MOVIE</p>
-          <form action="">
-            <div class="header-content__search-input">
-              <input type="text" placeholder="Movie title...">
-              <span>↵</span>
+    <header class="header">
+      <section class="header__logo logo narrow-width centralized">netflixroulette</section>
+      <section class="search narrow-width centralized">
+        <h1 class="uppercase">Find your movie</h1>
+        <form>
+          <div class="search__input">
+            <input class="search__field" type="text" placeholder="Movie title...">
+            <span class="search__symbol">↵</span>
+          </div>
+          <div class="search__filter">
+            <div class="search__by">
+                <span class="search__title uppercase">Search by</span>
+                <input class="search__option hidden" type="radio" id="searchby-title" name="searchby" value="title" checked>
+                <label class="search__option-label clickable uppercase" for="searchby-title">Title</label>
+                <input class="search__option hidden" type="radio" id="searchby-director" name="searchby" value="director">
+                <label class="search__option-label clickable uppercase" for="searchby-director">Director</label>
             </div>
-            <div class="header-content__search-customization">
-              <div class="header-content__search-by">
-                  <span>SEARCH BY</span>
-                  <input type="radio" id="searchby-title" name="searchby" value="title" checked>
-                  <label for="searchby-title">TITLE</label>
-                  <input type="radio" id="searchby-director" name="searchby" value="director">
-                  <label for="searchby-director">DIRECTOR</label>
-              </div>
-              <div class="header-content__search-btn">
-                  <input type="submit" value="SEARCH">
-              </div>
+            <div class="search__btn">
+                <input class="search__submit" type="submit" value="SEARCH">
             </div>
-          </form>
-        </div> 
-      </div>
-    </header>
-    <section class="sorting">
-      <div class="sorting-container">
-        <div class="sorting__results">7 movies found</div>
-        <div class="sorting__sortby">
-          <span>Sort by</span>
-          <span class="sorting__release-date">release date</span>
-          <span class="sorting__release-date">rating</span>
+          </div>
+        </form>
+      </section>
+      <section class="sorting">
+        <div class="sorting__container narrow-width centralized">
+          <div class="sorting__results">7 movies found</div>
+          <div class="sorting__sortby">
+            <span>Sort by</span>
+            <input class="sorting__release-date sorting__option hidden" id="sortby-releasedate" name="sortby" type="radio" value="release-date" checked>
+            <label class="sorting__option-label clickable" for="sortby-releasedate">release date</label>
+            <input class="sorting__rating sorting__option hidden" id="sortby-rating" name="sortby" type="radio" value="rating">
+            <label class="sorting__option-label clickable" for="sortby-rating">rating</label>
+          </div>
         </div>
-      </div>
-    </section>
-    <section class="movies-container">
-      <div class="movie">
+      </section>
+    </header>
+    <main class="movies-container">
+      <article class="movie">
         <img class="movie__pic" src="img/kill-bill-vol2.jpg" alt="Kill Bill Vol.2 picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Kill Bill: Vol 2</span>
+          <span class="movie__title uppercase">Kill Bill: Vol 2</span>
           <span class="movie__year">2004</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/kill-bill-vol1.jpg" alt="Kill Bill Vol.1 picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Kill Bill: Vol 1</span>
+          <span class="movie__title uppercase">Kill Bill: Vol 1</span>
           <span class="movie__year">2000</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/pulp-fiction.jpg" alt="Pulp Fiction picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Pulp Fiction</span>
+          <span class="movie__title uppercase">Pulp Fiction</span>
           <span class="movie__year">1994</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/jackie-brown.jpg" alt="Jackie Brown picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Jackie Brown</span>
+          <span class="movie__title uppercase">Jackie Brown</span>
           <span class="movie__year">1994</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/reservoir-dogs.jpg" alt="Reservoir Dogs picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Reservoir Dogs</span>
+          <span class="movie__title uppercase">Reservoir Dogs</span>
           <span class="movie__year">1994</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/four-rooms.jpg" alt="Four Rooms picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Four Rooms</span>
+          <span class="movie__title uppercase">Four Rooms</span>
           <span class="movie__year">1994</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-      <div class="movie">
+      </article>
+      <article class="movie">
         <img class="movie__pic" src="img/django.jpg" alt="Django Unchained picture">
         <div class="movie__title-and-year">
-          <span class="movie__title">Django Unchained</span>
+          <span class="movie__title uppercase">Django Unchained</span>
           <span class="movie__year">1994</span>
         </div>
         <div class="movie__description">
           movie description
         </div>
-      </div>
-    </div>
-    </section>
-    <footer>
-      <div class="footer-container">
-        <div class="footer-content__logo logo">netflixroulette</div>
+      </article>
+    </main>
+    <footer class="footer">
+      <div class="footer__container wide-width centralized">
+        <div class="footer__logo logo">netflixroulette</div>
       </div>
     </footer>
   </body>

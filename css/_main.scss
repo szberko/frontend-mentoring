@@ -1,0 +1,57 @@
+.movies-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.movie {
+  margin: 20px 5px;
+
+  @at-root &__pic {
+      width: 300px;
+      height: 450px;
+  }
+
+  @at-root &__title-and-year {
+      display: flex;
+  }
+
+  @at-root &__year {
+      border: 1px solid #000;
+      margin-left: auto;
+  }
+
+  @at-root &__description{
+      color: #808080;
+  }
+}
+
+
+@media screen and (max-width: 930px) {
+  .movies-container {
+    justify-content: space-around;
+  }
+  .movie {
+    flex-basis: 30%;
+
+    @at-root &__pic {
+      width: initial;
+      height: initial;
+      max-width: 300px;
+      max-height: 450px;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .movies-container {
+    justify-content: initial;
+  }
+
+  .movie {
+    margin: 0 auto;
+    padding: 10px;
+  }
+}

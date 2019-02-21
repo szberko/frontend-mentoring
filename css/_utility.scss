@@ -1,0 +1,37 @@
+.clickable {
+  cursor: pointer;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.narrow-width {
+  max-width: 900px;
+}
+
+.wide-width {
+  max-width: 1100px;
+}
+
+.centralized {
+  margin: 0 auto;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+
+@media screen and (max-width: 1120px) {
+  .wide-width {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .narrow-width {
+    padding: 0 20px;
+  }
+}
