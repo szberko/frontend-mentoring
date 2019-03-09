@@ -1,8 +1,5 @@
 "use strict";
 
-var input = "+ 3 + 4 / 20 4";
-var symbolArray = getSymbolArray(input);
-
 const minOperatorLvl = 1
 const maxOperatorLvl = 2;
 const definedOperatorPriority = {
@@ -20,18 +17,20 @@ const definedOperators = {
 }
 
 
-function Operation(operator, operatorPriority, leftOperand, rightOperand){
-    this.operator = operator;
-    this.operatorPriority = operatorPriority;
-    this.leftOperand = leftOperand;
-    this.rightOperand = rightOperand;
+class Operation {
+    constructor(operator, operatorPriority, leftOperand, rightOperand) {
+        this.operator = operator;
+        this.operatorPriority = operatorPriority;
+        this.leftOperand = leftOperand;
+        this.rightOperand = rightOperand;
+    }
 }
 
 function getSymbolArray(input){
     return input.split(" ");
 }
 
-function compute(input){
+function convertPNToOperationTree(input){
     if(input.length == 0){
         return;
     }
@@ -47,7 +46,7 @@ function compute(input){
         input.shift();
         leftOperand = input[0];
         input.shift();
-        rightOperand = compute(input);
+        rightOperand = convertPNToOperationTree(input);
     }else{
         rightOperand = input[0];
     }
@@ -55,11 +54,11 @@ function compute(input){
     return new Operation(operator, operatorPriority, leftOperand, rightOperand);
 }
 
-function resolve(input, operatorLvl){
+function resolveOperationTree(input, operatorLvl){
     if(input.operator == undefined){
         return;
     }else{
-        resolve(input.rightOperand, operatorLvl);
+        resolveOperationTree(input.rightOperand, operatorLvl);
         
         if(input.operatorPriority == operatorLvl){
             let currentOperator = definedOperators[input.operator];
@@ -70,16 +69,19 @@ function resolve(input, operatorLvl){
     return input;
 }
 
-function getSolution(input){
+function calcSolution(input){
     let operationTree = input;
 
     for(let operatorLvl = 1; operatorLvl <= maxOperatorLvl; operatorLvl++){
-        operationTree = resolve(operationTree, operatorLvl);
+        operationTree = resolveOperationTree(operationTree, operatorLvl);
     }
     return operationTree.rightOperand;
 }
 
-var operationTree = compute(symbolArray, operationTree);
+var polishNotation = "+ 3 + 4 / 20 4";
+var polishNotationArray = getSymbolArray(polishNotation);
+
+var operationTree = convertPNToOperationTree(polishNotationArray);
 console.log(operationTree);
-var solution = getSolution(operationTree);
+var solution = calcSolution(operationTree);
 console.log(solution)
