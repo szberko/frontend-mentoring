@@ -3,6 +3,8 @@
 var input = "+ 3 + 4 / 20 4";
 var symbolArray = getSymbolArray(input);
 
+const minOperationLvl = 1
+const maxOperationLvl = 2;
 const definedOperationPriority = {
     "/" : 1,
     "*" : 1,
@@ -54,35 +56,31 @@ function compute(input){
     return new Operation(operation, operationPriority, leftOperand, rightOperand);
 }
 
-var currentOpLevel = 1;
-
-function resolve(operationTree){
-    let oneLevelDeeperOp;
-    if(operationTree.operation == undefined){
-        oneLevelDeeperOp = operationTree;
+function resolve(input, operationLvl){
+    if(input.operation == undefined){
+        return;
     }else{
-        oneLevelDeeperOp = resolve(operationTree.rightOperand);
+        resolve(input.rightOperand, operationLvl);
         
-        if(operationTree.operationPriority == currentOpLevel){
-            let currentOperation = definedOperations[operationTree.operation];
-            let calculatedValue = currentOperation(operationTree.leftOperand, operationTree.rightOperand.rightOperand);
-            operationTree.rightOperand = calculatedValue;
-
-            oneLevelDeeperOp = operationTree;
+        if(input.operationPriority == operationLvl){
+            let currentOperation = definedOperations[input.operation];
+            let calculatedValue = currentOperation(input.leftOperand, input.rightOperand.rightOperand);
+            input.rightOperand = calculatedValue;
         }
-
-        
     }
-    return oneLevelDeeperOp;
+    return input;
+}
+
+function getSolution(input){
+    let operationTree = input;
+
+    for(let operationLvl = 1; operationLvl <= maxOperationLvl; operationLvl++){
+        operationTree = resolve(operationTree, operationLvl);
+    }
+    return operationTree.rightOperand;
 }
 
 var operationTree = compute(symbolArray, operationTree);
-
 console.log(operationTree);
-
-var operationTree1 = resolve(operationTree);
-currentOpLevel++;
-var operationTree2 = resolve(operationTree1);
-
-console.log(operationTree2);
-
+var solution = getSolution(operationTree);
+console.log(solution)
