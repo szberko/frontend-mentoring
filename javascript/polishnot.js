@@ -17,7 +17,7 @@ const definedOperators = {
 }
 
 
-class Operation {
+class OperationTree {
     constructor(operator, operatorPriority, leftOperand, rightOperand) {
         this.operator = operator;
         this.operatorPriority = operatorPriority;
@@ -30,6 +30,10 @@ function getSymbolArray(input){
     return input.split(" ");
 }
 
+/**
+ * Converts String into OperationTree recoursively
+ * @param {String} input 
+ */
 function convertPNToOperationTree(input){
     if(input.length == 0){
         return;
@@ -51,30 +55,40 @@ function convertPNToOperationTree(input){
         rightOperand = input[0];
     }
     
-    return new Operation(operator, operatorPriority, leftOperand, rightOperand);
+    return new OperationTree(operator, operatorPriority, leftOperand, rightOperand);
 }
 
-function resolveOperationTree(input, operatorLvl){
-    if(input.operator == undefined){
-        return;
-    }else{
-        resolveOperationTree(input.rightOperand, operatorLvl);
-        
-        if(input.operatorPriority == operatorLvl){
-            let currentOperator = definedOperators[input.operator];
-            let calculatedValue = currentOperator(input.leftOperand, input.rightOperand.rightOperand);
-            input.rightOperand = calculatedValue;
-        }
-    }
-    return input;
-}
-
+/**
+ * Calculates the solution of math expression given as OperationTree
+ * @param {OperationTree} input 
+ */
 function calcSolution(input){
     let operationTree = input;
 
     for(let operatorLvl = 1; operatorLvl <= maxOperatorLvl; operatorLvl++){
         operationTree = resolveOperationTree(operationTree, operatorLvl);
     }
+
+    /**
+     * Resolves OperationTree recoursively.
+     * @param {OperationTree} input 
+     * @param {Number} operatorLvl 
+     */
+    function resolveOperationTree(input, operatorLvl){
+        if(input.operator == undefined){
+            return;
+        }else{
+            resolveOperationTree(input.rightOperand, operatorLvl);
+            
+            if(input.operatorPriority == operatorLvl){
+                let currentOperator = definedOperators[input.operator];
+                let calculatedValue = currentOperator(input.leftOperand, input.rightOperand.rightOperand);
+                input.rightOperand = calculatedValue;
+            }
+        }
+        return input;
+    }
+
     return operationTree.rightOperand;
 }
 
