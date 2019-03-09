@@ -1,36 +1,35 @@
 function convertQueryToMap(query){
-    if(query == ""){
-        return {};
-    }
-    
-    let result;
+    let result = {};
 
     if(query.includes("&")){
-        let retVal = {};
-        result = query.split("&").reduce( (retVal, currentPair) => {
+        let initialValue = {};
+        result = query.split("&").reduce( (outerAggregator, currentPair) => {
             let parsedPair = currentPair.split("=")
-                                        .map(pair => decodeURIComponent(pair));
+                                        .map(decodeURI);
 
-            parsedPair[0].split(".").reduce( (obj, key, currentIndex, array) => 
-            {
-                if(!(key in obj)){
+            parsedPair[0].split(".").reduce( (innerAgregator, key, currentIndex, array) => {
+                if(!(key in innerAgregator)){
+                    // If we are at the end of the path set the field to it's actual value
                     if(currentIndex == array.length-1){
-                        obj[key] = parsedPair[1];
-                    }else{
-                        obj[key] = {};
+                        innerAgregator[key] = parsedPair[1];
+                    }
+                    // If we are NOT at the end of the path create a new empty object
+                    else{
+                        innerAgregator[key] = {};
                     }
                 }
-                obj = obj[key];
-                return obj;
-            }, retVal);
+                // Nest the newly created object into the outer object
+                innerAgregator = innerAgregator[key];
+                return innerAgregator;
+            }, outerAggregator);
             
-            return retVal;
-        }, retVal);
+            return outerAggregator;
+        }, initialValue);
 
     }else{
         result = [query].reduce( (resultingObj, currentPair) => {
             let parsedPair = currentPair.split("=")
-                                        .map(pair => decodeURIComponent(pair));
+                                        .map(decodeURI);
             resultingObj[parsedPair[0]] = parsedPair[1];
             return resultingObj;
         }, {});
@@ -39,7 +38,8 @@ function convertQueryToMap(query){
     return result;
 }
 
-let prettyPrint = string => JSON.stringify(string, null, 2)
+let decodeURI = uri => decodeURIComponent(uri);
+let prettyPrint = string => JSON.stringify(string, null, 2);
 
 var handleEmptyStringResult = convertQueryToMap("");
 console.log("Criteria 1: ")
