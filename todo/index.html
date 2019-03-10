@@ -4,45 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/app.js"></script>
     <link rel="stylesheet" href="css/app.css">
     <title>TODO app</title>
 </head>
-<body>
+<body onload="updateTheLists()">
     <header class="header wide-width center">
         <div class="add">
-            <input class="add__name add__element" type="text" placeholder="Enter your todo...">
-            <input class="add__btn add__element" type="button" value="↵">
+            <input id="new-todo-name" class="add__name add__element" type="text" placeholder="Enter your todo...">
+            <input id="add-new-todo" class="add__btn add__element" type="button" value="↵">
         </div>
     </header>
     <main class="main wide-width center">
         <section class="todo-items">
             <h2>To do:</h2>
             <ul id="todo-list" class="todo-items__list">
-                <li class="todo">
-                    <div class="todo__name todo__element">Todo 1</div>
-                    <div class="todo__moveup todo__element todo__modifier">↑</div>
-                    <div class="todo__movedown todo__element todo__modifier">↓</div>
-                    <div class="todo__complete todo__element todo__modifier">✓</div>
-                    <div class="todo__delete todo__element todo__modifier">╳</div>
-                </li>
-                <li class="todo">
-                    <div class="todo__name">
-                        Todo 2
-                    </div>
-                </li>
             </ul>
         </section>
         <section class="completed-items">
             <h2>Completed:</h2>
-            <ul class="completed-items__container">
-                <li class="completed">
-                    <div class="completed__name">
-                        Todo 3
-                    </div>
-                </li>
+            <ul id="completed-list" class="todo-items__list">
             </ul>
         </section>
     </main>
+    <script src="js/app.js"></script>
 </body>
 </html>
