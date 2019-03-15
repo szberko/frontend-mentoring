@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="css/app.css">
     <title>TODO app</title>
 </head>
-<body onload="updateTheLists()">
+<body onload="updateTheTodoLists()">
     <header class="header wide-width center">
-        <div class="add">
+        <form id="add-new-todo" class="add">
             <input id="new-todo-name" class="add__name add__element" type="text" placeholder="Enter your todo...">
-            <input id="add-new-todo" class="add__btn add__element" type="button" value="↵">
-        </div>
+            <input  class="add__btn add__element" type="submit" value="↵">
+        </form>
     </header>
     <main class="main wide-width center">
         <section class="todo-items">

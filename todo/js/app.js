@@ -40,7 +40,7 @@ var todoItems = [
     new Todo("Milk", 1, false),
     new Todo("Eggs", 2, false),
     new Todo("Sugar", 3, false),
-    new Todo("Carrots", 4, true)
+    new Todo("Carrots", null, true)
 ];
 
 
@@ -112,7 +112,8 @@ function deleteTodo(todoId){
     updateTheTodoLists();
 }
 
-
-document.getElementById("add-new-todo").addEventListener("click", function() {
-    createTodo(this.previousElementSibling.value);
+document.getElementById("add-new-todo").addEventListener("submit", function(event) {
+    event.preventDefault();
+    createTodo(this.firstElementChild.value);
+    this.firstElementChild.value = '';
 })
