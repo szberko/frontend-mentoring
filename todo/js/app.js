@@ -34,6 +34,8 @@ class Todo{
     }
 }
 
+const FILTER_OUT_NON_COMPLETED_TODO = todo => !todo.completed;
+
 var todoItems = [
     new Todo("Milk", 1, false),
     new Todo("Eggs", 2, false),
@@ -42,8 +44,17 @@ var todoItems = [
 ];
 
 
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
 
-function updateTheLists(){
+function fillTheLists(){
     todoItems.filter(todo => !todo.completed)
                 .sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
                 .forEach( todoItem => {
@@ -66,40 +77,41 @@ function resetTheLists(){
     while(completedList.firstChild){
         completedList.removeChild(completedList.firstChild);
     }
-
 }
 
-function createTodo(todoName){
-    // TODO - Handle the case when there is no incompleted item on the list
-    let lastOrderNumber = todoItems.filter(todo => !todo.completed)[todoItems.length - 1].orderNumber;
-    todoItems.push(
-        new Todo(todoName, lastOrderNumber + 1, false)
-    );
+function updateTheTodoLists(){
     resetTheLists();
-    updateTheLists();
+    fillTheLists();
+}
 
+
+
+function createTodo(todoName){
+    let orderNumber = todoItems.filter(FILTER_OUT_NON_COMPLETED_TODO).length + 1;
+    todoItems.push(
+        new Todo(todoName, orderNumber, false)
+    );
+    updateTheTodoLists();
     console.log(todoItems);
 }
 
 function deleteTodo(todoId){
-    todoItems.filter( (todo, index, todoList) => {
-        if(todo.id === todoId){
+    let orderNumberOfDeletedTodo;
+    todoItems.forEach( (todoToBeDeleted, index, todoList) => {
+        if(todoToBeDeleted.id === todoId){
+            orderNumberOfDeletedTodo = todoToBeDeleted.orderNumber;
             todoList.splice(index, 1);
+            return;
         }
     })
-    resetTheLists();
-    updateTheLists();
+
+    todoItems.filter(FILTER_OUT_NON_COMPLETED_TODO)
+                .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
+                .map(todo => todo.orderNumber--);
+
+    updateTheTodoLists();
 }
 
-function create_UUID(){
-    var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (dt + Math.random()*16)%16 | 0;
-        dt = Math.floor(dt/16);
-        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-}
 
 document.getElementById("add-new-todo").addEventListener("click", function() {
     createTodo(this.previousElementSibling.value);
