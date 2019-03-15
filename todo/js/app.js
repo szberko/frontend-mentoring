@@ -79,9 +79,19 @@ function resetTheLists(){
     }
 }
 
+function attachEventListeners(){
+
+    Array.from(document.getElementsByClassName("todo__delete")).forEach( element => {
+        element.addEventListener("click", function() {
+            deleteTodo(this.parentNode.id);
+        })
+    });
+}
+
 function updateTheTodoLists(){
     resetTheLists();
     fillTheLists();
+    attachEventListeners();
 }
 
 
@@ -112,8 +122,14 @@ function deleteTodo(todoId){
     updateTheTodoLists();
 }
 
-document.getElementById("add-new-todo").addEventListener("submit", function(event) {
-    event.preventDefault();
-    createTodo(this.firstElementChild.value);
-    this.firstElementChild.value = '';
-})
+
+
+window.onload = function() {
+    updateTheTodoLists();
+
+    document.getElementById("add-new-todo").addEventListener("submit", function(event) {
+        event.preventDefault();
+        createTodo(this.firstElementChild.value);
+        this.firstElementChild.value = '';
+    })
+}
