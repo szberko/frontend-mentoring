@@ -28,7 +28,7 @@ export class Todo{
         liElement.classList = "todo completed";
         liElement.innerHTML = `
             <div class="todo__name todo__element">${this.name}</div>
-            <div class="todo__delete todo__element todo__modifier" onClick="deleteTodo(this.parentNode.id)">╳</div>
+            <div class="todo__delete todo__element todo__modifier">╳</div>
         `;
         return liElement;
     }

@@ -30,6 +30,37 @@ export class ListOfTodos{
                     .map(todo => todo.orderNumber--);
     }
 
+    completeTodo(todoToBeCompletedId){
+        let todoToBeCompleted = this.listOfTodos.find( todo => todo.id === todoToBeCompletedId);
+        this.listOfTodos.filter( todo => todo.orderNumber > todoToBeCompleted.orderNumber).map(todo => {
+            todo.orderNumber--;
+        })
+
+        todoToBeCompleted.completed = true;
+        todoToBeCompleted.orderNumber = null;
+    }
+
+    moveUp(todoId){
+        let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== 1);
+
+        if(todoItem !== undefined){
+            let todoItemWithHigherPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber - 1);
+            todoItemWithHigherPrio.orderNumber++;
+            todoItem.orderNumber--;
+        }
+    }
+
+    moveDown(todoId){
+        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.FILTER_OUT_NON_COMPLETED_TODO).length;
+        let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== numberOfNonCompletedTodos);
+
+        if(todoItem !== undefined){
+            let todoItemWithLowerPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber + 1);
+            todoItemWithLowerPrio.orderNumber -- ;
+            todoItem.orderNumber++;
+        }
+    }
+
     fillTheLists(){
         let self = this;
         this.listOfTodos.filter(todo => !todo.completed)
@@ -41,12 +72,39 @@ export class ListOfTodos{
 
                             self.resetTheLists();
                             self.fillTheLists();
+                        });
+
+                        todoElem.getElementsByClassName("todo__complete")[0].addEventListener("click", function() {
+                            self.completeTodo(todoItem.id);
+
+                            self.resetTheLists();
+                            self.fillTheLists();
+                        });
+
+                        todoElem.getElementsByClassName("todo__moveup")[0].addEventListener("click", function() {
+                            self.moveUp(todoItem.id);
+
+                            self.resetTheLists();
+                            self.fillTheLists();
+                        })
+
+                        todoElem.getElementsByClassName("todo__movedown")[0].addEventListener("click", function() {
+                            self.moveDown(todoItem.id);
+
+                            self.resetTheLists();
+                            self.fillTheLists();
                         })
                     });
     
         this.listOfTodos.filter(todo => todo.completed)
                     .forEach(completedItem => {
-                        document.getElementById("completed-list").appendChild(completedItem.convertCompleteToDOM());
+                        let todoElem = document.getElementById("completed-list").appendChild(completedItem.convertCompleteToDOM());
+                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", function() {
+                            self.deleteTodo(completedItem.id);
+
+                            self.resetTheLists();
+                            self.fillTheLists();
+                        })
                     });
     }
 
