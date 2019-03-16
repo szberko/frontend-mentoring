@@ -5,11 +5,11 @@ import {Todo} from "./todo.js";
 export class ListOfTodos{
     constructor(listOfTodos){
         this.listOfTodos = listOfTodos;
-        this.FILTER_OUT_NON_COMPLETED_TODO = todo => !todo.completed;
+        this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
     }
 
     createTodo(todoName){
-        let orderNumber = this.listOfTodos.filter(this.FILTER_OUT_NON_COMPLETED_TODO).length + 1;
+        let orderNumber = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length + 1;
         this.listOfTodos.push(
             new Todo(todoName, orderNumber, false)
         );
@@ -27,7 +27,7 @@ export class ListOfTodos{
         })
 
         // Lower the order number for all the todos which are above the deleted one
-        this.listOfTodos.filter(this.FILTER_OUT_NON_COMPLETED_TODO)
+        this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS)
                     .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
                     .map(todo => todo.orderNumber--);
     }
@@ -59,7 +59,7 @@ export class ListOfTodos{
 
     moveDown(todoId){
         // Get the requested todo. CHeck is it the last element already
-        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.FILTER_OUT_NON_COMPLETED_TODO).length;
+        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length;
         let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== numberOfNonCompletedTodos);
 
         // Decrease the order number for the todo which is below the todoItem
