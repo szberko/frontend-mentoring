@@ -17,6 +17,7 @@ export class ListOfTodos{
 
     deleteTodo(todoId){
         let orderNumberOfDeletedTodo;
+        // Remove todo from the list of todos
         this.listOfTodos.forEach( (todoToBeDeleted, index) => {
             if(todoToBeDeleted.id === todoId){
                 orderNumberOfDeletedTodo = todoToBeDeleted.orderNumber;
@@ -25,6 +26,7 @@ export class ListOfTodos{
             }
         })
 
+        // Lower the order number for all the todos which are above the deleted one
         this.listOfTodos.filter(this.FILTER_OUT_NON_COMPLETED_TODO)
                     .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
                     .map(todo => todo.orderNumber--);
@@ -32,17 +34,22 @@ export class ListOfTodos{
 
     completeTodo(todoToBeCompletedId){
         let todoToBeCompleted = this.listOfTodos.find( todo => todo.id === todoToBeCompletedId);
+        // Lower the order number for all the todos which are above the completed one
         this.listOfTodos.filter( todo => todo.orderNumber > todoToBeCompleted.orderNumber).map(todo => {
             todo.orderNumber--;
         })
 
+        // Mark the todo as completed and set the order number to null
         todoToBeCompleted.completed = true;
         todoToBeCompleted.orderNumber = null;
     }
 
     moveUp(todoId){
+        // Get the reuqested todo. Check is it the first element already
         let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== 1);
 
+        // Increase the order number for todo which is ahead of the todoItem
+        // Decrease the order number for the todoItem
         if(todoItem !== undefined){
             let todoItemWithHigherPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber - 1);
             todoItemWithHigherPrio.orderNumber++;
@@ -51,9 +58,12 @@ export class ListOfTodos{
     }
 
     moveDown(todoId){
+        // Get the requested todo. CHeck is it the last element already
         let numberOfNonCompletedTodos = this.listOfTodos.filter(this.FILTER_OUT_NON_COMPLETED_TODO).length;
         let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== numberOfNonCompletedTodos);
 
+        // Decrease the order number for the todo which is below the todoItem
+        // Increase the order number for the todoItem
         if(todoItem !== undefined){
             let todoItemWithLowerPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber + 1);
             todoItemWithLowerPrio.orderNumber -- ;
@@ -61,6 +71,9 @@ export class ListOfTodos{
         }
     }
 
+    /**
+     * Populate the web application with already created todos
+     */
     fillTheLists(){
         let self = this;
         this.listOfTodos.filter(todo => !todo.completed)
@@ -108,6 +121,9 @@ export class ListOfTodos{
                     });
     }
 
+    /**
+     * Removes all todos from the web application
+     */
     resetTheLists(){
         let todoList = document.getElementById("todo-list");
         let completedList = document.getElementById("completed-list")
