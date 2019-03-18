@@ -30,6 +30,3 @@ function evalPolishNotation(input){
 
     return resolutionStack[0];
 }
-
-var result = evalPolishNotation("+ 3 + 4 / 20 4");
-console.log(result);
