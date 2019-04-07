@@ -1,0 +1,14 @@
+{
+  "name": "polish_notation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "polishnot.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.3.1"
+  }
+}

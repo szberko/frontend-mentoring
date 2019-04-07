@@ -1,0 +1,30 @@
+.todo-items__list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo{
+    background-color: $input-field-bg-color;
+    color: $todo-text-color;
+    padding: 15px;
+    font-size: 20px;
+    margin: 25px 0;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+
+    @at-root &__name{
+        flex-grow: 1;
+    }
+
+    @at-root &__modifier{
+        flex-grow: 0;
+        margin: 0 10px;
+        cursor: pointer;
+        color: $active-color;
+    }
+}
+
+.completed{
+    opacity: .5;
+}

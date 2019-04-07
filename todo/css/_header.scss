@@ -1,0 +1,22 @@
+.add {
+    padding: 40px 0;
+    display: flex;
+
+    @at-root &__name {
+        flex-grow: 1;
+    }
+
+    @at-root &__btn{
+        flex-grow: 0;
+        cursor: pointer;
+    }
+
+    @at-root &__element{
+        border: none;
+        background-color: $input-field-bg-color;
+        color: $input-field-text-color;
+        font-size: 30px;
+        padding: 15px;
+        border-bottom: 2px solid $active-color;
+    }
+}
