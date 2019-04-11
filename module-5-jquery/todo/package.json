@@ -1,7 +1,6 @@
 {
   "name": "todo",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
     "start": "lite-server"
   },
