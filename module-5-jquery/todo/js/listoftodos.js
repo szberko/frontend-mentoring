@@ -75,48 +75,47 @@ export class ListOfTodos{
      * Populate the web application with already created todos
      */
     fillTheLists(){
-        let self = this;
         this.listOfTodos.filter(todo => !todo.completed)
                     .sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
                     .forEach( todoItem => {
                         let todoElem = document.getElementById("todo-list").appendChild(todoItem.convertIncompleteToDOM());
-                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", function() {
-                            self.deleteTodo(todoItem.id);
+                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", () => {
+                            this.deleteTodo(todoItem.id);
 
-                            self.resetTheLists();
-                            self.fillTheLists();
+                            this.resetTheLists();
+                            this.fillTheLists();
                         });
 
-                        todoElem.getElementsByClassName("todo__complete")[0].addEventListener("click", function() {
-                            self.completeTodo(todoItem.id);
+                        todoElem.getElementsByClassName("todo__complete")[0].addEventListener("click", () => {
+                            this.completeTodo(todoItem.id);
 
-                            self.resetTheLists();
-                            self.fillTheLists();
+                            this.resetTheLists();
+                            this.fillTheLists();
                         });
 
-                        todoElem.getElementsByClassName("todo__moveup")[0].addEventListener("click", function() {
-                            self.moveUp(todoItem.id);
+                        todoElem.getElementsByClassName("todo__moveup")[0].addEventListener("click", () => {
+                            this.moveUp(todoItem.id);
 
-                            self.resetTheLists();
-                            self.fillTheLists();
+                            this.resetTheLists();
+                            this.fillTheLists();
                         })
 
-                        todoElem.getElementsByClassName("todo__movedown")[0].addEventListener("click", function() {
-                            self.moveDown(todoItem.id);
+                        todoElem.getElementsByClassName("todo__movedown")[0].addEventListener("click", () => {
+                            this.moveDown(todoItem.id);
 
-                            self.resetTheLists();
-                            self.fillTheLists();
+                            this.resetTheLists();
+                            this.fillTheLists();
                         })
                     });
     
         this.listOfTodos.filter(todo => todo.completed)
                     .forEach(completedItem => {
                         let todoElem = document.getElementById("completed-list").appendChild(completedItem.convertCompleteToDOM());
-                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", function() {
-                            self.deleteTodo(completedItem.id);
+                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", () => {
+                            this.deleteTodo(completedItem.id);
 
-                            self.resetTheLists();
-                            self.fillTheLists();
+                            this.resetTheLists();
+                            this.fillTheLists();
                         })
                     });
     }
