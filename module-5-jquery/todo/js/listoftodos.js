@@ -11,8 +11,9 @@ export class ListOfTodos{
     createTodo(todoName){
         let orderNumber = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length + 1;
         this.listOfTodos.push(
-            new Todo(todoName, orderNumber, false)
+            new Todo(todoName, orderNumber, false, this)
         );
+        this.updateTheList();
     }
 
     deleteTodo(todoId){
@@ -30,6 +31,8 @@ export class ListOfTodos{
         this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS)
                     .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
                     .map(todo => todo.orderNumber--);
+
+        this.updateTheList();
     }
 
     completeTodo(todoToBeCompletedId){
@@ -42,6 +45,8 @@ export class ListOfTodos{
         // Mark the todo as completed and set the order number to null
         todoToBeCompleted.completed = true;
         todoToBeCompleted.orderNumber = null;
+
+        this.updateTheList();
     }
 
     moveUp(todoId){
@@ -55,6 +60,8 @@ export class ListOfTodos{
             todoItemWithHigherPrio.orderNumber++;
             todoItem.orderNumber--;
         }
+
+        this.updateTheList();
     }
 
     moveDown(todoId){
@@ -69,55 +76,20 @@ export class ListOfTodos{
             todoItemWithLowerPrio.orderNumber -- ;
             todoItem.orderNumber++;
         }
+
+        this.updateTheList();
     }
 
     /**
      * Populate the web application with already created todos
      */
     fillTheLists(){
-        this.listOfTodos.filter(todo => !todo.completed)
-                    .sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
-                    .forEach( todoItem => {
-                        let todoElem = todoItem.convertIncompleteToDOM().appendTo($("#todo-list"));
-                        todoElem.children(".todo__delete").click( () => {
-                            this.deleteTodo(todoItem.id);
-
-                            this.resetTheLists();
-                            this.fillTheLists();
-                        });
-
-                        todoElem.children(".todo__complete").click( () => {
-                            this.completeTodo(todoItem.id);
-
-                            this.resetTheLists();
-                            this.fillTheLists();
-                        });
-
-                        todoElem.children(".todo__moveup").click( () => {
-                            this.moveUp(todoItem.id);
-
-                            this.resetTheLists();
-                            this.fillTheLists();
-                        })
-
-                        todoElem.children(".todo__movedown").click( () => {
-                            this.moveDown(todoItem.id);
-
-                            this.resetTheLists();
-                            this.fillTheLists();
-                        })
-                    });
-    
-        this.listOfTodos.filter(todo => todo.completed)
-                    .forEach(completedItem => {
-                        let todoElem = completedItem.convertCompleteToDOM().appendTo($("#completed-list"));
-                        todoElem.children(".todo__delete").click( () => {
-                            this.deleteTodo(completedItem.id);
-
-                            this.resetTheLists();
-                            this.fillTheLists();
-                        })
-                    });
+        this.listOfTodos.sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
+                    .forEach(item => {
+                        item.completed ? 
+                            item.convertCompleteToDOM().appendTo($("#completed-list")) : 
+                            item.convertIncompleteToDOM().appendTo($("#todo-list"))
+                    })
     }
 
     /**
