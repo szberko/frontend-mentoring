@@ -78,29 +78,29 @@ export class ListOfTodos{
         this.listOfTodos.filter(todo => !todo.completed)
                     .sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
                     .forEach( todoItem => {
-                        let todoElem = document.getElementById("todo-list").appendChild(todoItem.convertIncompleteToDOM());
-                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", () => {
+                        let todoElem = todoItem.convertIncompleteToDOM().appendTo($("#todo-list"));
+                        todoElem.children(".todo__delete").click( () => {
                             this.deleteTodo(todoItem.id);
 
                             this.resetTheLists();
                             this.fillTheLists();
                         });
 
-                        todoElem.getElementsByClassName("todo__complete")[0].addEventListener("click", () => {
+                        todoElem.children(".todo__complete").click( () => {
                             this.completeTodo(todoItem.id);
 
                             this.resetTheLists();
                             this.fillTheLists();
                         });
 
-                        todoElem.getElementsByClassName("todo__moveup")[0].addEventListener("click", () => {
+                        todoElem.children(".todo__moveup").click( () => {
                             this.moveUp(todoItem.id);
 
                             this.resetTheLists();
                             this.fillTheLists();
                         })
 
-                        todoElem.getElementsByClassName("todo__movedown")[0].addEventListener("click", () => {
+                        todoElem.children(".todo__movedown").click( () => {
                             this.moveDown(todoItem.id);
 
                             this.resetTheLists();
@@ -110,8 +110,8 @@ export class ListOfTodos{
     
         this.listOfTodos.filter(todo => todo.completed)
                     .forEach(completedItem => {
-                        let todoElem = document.getElementById("completed-list").appendChild(completedItem.convertCompleteToDOM());
-                        todoElem.getElementsByClassName("todo__delete")[0].addEventListener("click", () => {
+                        let todoElem = completedItem.convertCompleteToDOM().appendTo($("#completed-list"));
+                        todoElem.children(".todo__delete").click( () => {
                             this.deleteTodo(completedItem.id);
 
                             this.resetTheLists();
@@ -124,15 +124,8 @@ export class ListOfTodos{
      * Removes all todos from the web application
      */
     resetTheLists(){
-        let todoList = document.getElementById("todo-list");
-        let completedList = document.getElementById("completed-list")
-        while(todoList.firstChild){
-            todoList.removeChild(todoList.firstChild);
-        }
-    
-        while(completedList.firstChild){
-            completedList.removeChild(completedList.firstChild);
-        }
+        $("#todo-list").empty();
+        $("#completed-list").empty();
     }
 
     updateTheList(){
