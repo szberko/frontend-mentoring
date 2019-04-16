@@ -1,0 +1,1 @@
+1. How will "this" behave when you use an arrow function or traditional function definition for event handling within jQuery?
