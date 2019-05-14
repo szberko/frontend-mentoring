@@ -55,7 +55,7 @@ class App{
 
     moveUp(todoId){
         // Get the reuqested todo. Check is it the first element already
-        let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== 1);
+        let todoItem = this.listOfTodos.find((todo, index) => todo.id === todoId && index !== 0);
 
         // Increase the order number for todo which is ahead of the todoItem
         // Decrease the order number for the todoItem
