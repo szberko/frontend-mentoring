@@ -6,19 +6,19 @@ $(document).ready(() => {
             type: "GET",
             dataType: "json",
             url: `https://restcountries.eu/rest/v2/capital/${capital}`,
-            beforeSend: function() {
+            beforeSend() {
                 $(".loader").show();
                 $('#countries').empty();
             },
-            success: function(data){
+            success(data){
                 printCountries(data);
             },
             statusCode:{
-                404: function() {
+                404() {
                     $('#countries').append(`There are no countries with capital: ${capital}`);
                 }
             },
-            complete: function() {
+            complete() {
                 $(".loader").hide();
             }
         });
