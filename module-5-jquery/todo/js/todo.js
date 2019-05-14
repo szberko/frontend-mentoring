@@ -1,5 +1,3 @@
-'use strict';
-
 export class Todo{
     constructor(name, orderNumber, completed, app){
         this.id = create_UUID();
