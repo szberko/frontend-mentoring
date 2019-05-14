@@ -3,6 +3,7 @@ import {Todo} from './todo.js';
 class App{
     constructor(listOfTodos){
         this.listOfTodos = listOfTodos;
+        this.todoItemsContainer = $('.todo-items__list');
         this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
 
         this.bindEvents();
@@ -88,19 +89,19 @@ class App{
             inputField.val('');
         });
     
-        $('.todo-items__list').on('click', '.todo__moveup', (event) => {
+        this.todoItemsContainer.on('click', '.todo__moveup', (event) => {
             this.moveUp($(event.target).parent().attr('id'));
         });
     
-        $('.todo-items__list').on('click', '.todo__movedown', (event) => {
+        this.todoItemsContainer.on('click', '.todo__movedown', (event) => {
             this.moveDown($(event.target).parent().attr('id'));
         });
     
-        $('.todo-items__list').on('click', '.todo__complete', (event) => {
+        this.todoItemsContainer.on('click', '.todo__complete', (event) => {
             this.completeTodo($(event.target).parent().attr('id'));
         });
     
-        $('.todo-items__list').on('click', '.todo__delete', (event) => {
+        this.todoItemsContainer.on('click', '.todo__delete', (event) => {
             this.deleteTodo($(event.target).parent().attr('id'));
         });
     }
