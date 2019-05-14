@@ -4,6 +4,8 @@ class App{
     constructor(listOfTodos){
         this.listOfTodos = listOfTodos;
         this.todoItemsContainer = $('.todo-items__list');
+        this.completedTodoContainer = $('#completed-list');
+        this.unCompletedTodoContainer = $('#todo-list');
         this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
 
         this.bindEvents();
@@ -113,8 +115,8 @@ class App{
         this.listOfTodos.sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
                     .forEach(item => {
                         item.completed ? 
-                            item.convertCompleteToDOM().appendTo($('#completed-list')) : 
-                            item.convertIncompleteToDOM().appendTo($('#todo-list'));
+                            item.convertCompleteToDOM().appendTo(this.completedTodoContainer) : 
+                            item.convertIncompleteToDOM().appendTo(this.unCompletedTodoContainer);
                     });
     }
 
@@ -122,8 +124,8 @@ class App{
      * Removes all todos from the web application
      */
     resetTheLists(){
-        $('#todo-list').empty();
-        $('#completed-list').empty();
+        this.unCompletedTodoContainer.empty();
+        this.completedTodoContainer.empty();
     }
 
     updateTheList(){
