@@ -6,13 +6,14 @@ class App{
         this.todoItemsContainer = $('.todo-items__list');
         this.completedTodoContainer = $('#completed-list');
         this.unCompletedTodoContainer = $('#todo-list');
-        this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
 
         this.bindEvents();
     }
 
+    filterNonCompletedTodos = todo => !todo.completed;
+
     createTodo(todoName){
-        let orderNumber = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length + 1;
+        let orderNumber = this.listOfTodos.filter(this.filterNonCompletedTodos).length + 1;
         this.listOfTodos.push(
             new Todo(todoName, orderNumber, false, this)
         );
@@ -31,7 +32,7 @@ class App{
         })
 
         // Lower the order number for all the todos which are above the deleted one
-        this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS)
+        this.listOfTodos.filter(this.filterNonCompletedTodos)
                     .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
                     .map(todo => todo.orderNumber--);
 
@@ -69,14 +70,14 @@ class App{
 
     moveDown(todoId){
         // Get the requested todo. CHeck is it the last element already
-        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length;
+        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.filterNonCompletedTodos).length;
         let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== numberOfNonCompletedTodos);
 
         // Decrease the order number for the todo which is below the todoItem
         // Increase the order number for the todoItem
         if(todoItem){
             let todoItemWithLowerPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber + 1);
-            todoItemWithLowerPrio.orderNumber -- ;
+            todoItemWithLowerPrio.orderNumber--;
             todoItem.orderNumber++;
         }
 
