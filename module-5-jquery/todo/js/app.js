@@ -56,7 +56,7 @@ class App{
 
         // Increase the order number for todo which is ahead of the todoItem
         // Decrease the order number for the todoItem
-        if(todoItem !== undefined){
+        if(todoItem){
             let todoItemWithHigherPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber - 1);
             todoItemWithHigherPrio.orderNumber++;
             todoItem.orderNumber--;
@@ -72,7 +72,7 @@ class App{
 
         // Decrease the order number for the todo which is below the todoItem
         // Increase the order number for the todoItem
-        if(todoItem !== undefined){
+        if(todoItem){
             let todoItemWithLowerPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber + 1);
             todoItemWithLowerPrio.orderNumber -- ;
             todoItem.orderNumber++;
