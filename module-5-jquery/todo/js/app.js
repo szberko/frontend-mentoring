@@ -1,17 +1,19 @@
-'use strict';
-
 import {Todo} from './todo.js';
 
 class App{
     constructor(listOfTodos){
         this.listOfTodos = listOfTodos;
-        this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
+        this.todoItemsContainer = $('.todo-items__list');
+        this.completedTodoContainer = $('#completed-list');
+        this.unCompletedTodoContainer = $('#todo-list');
 
         this.bindEvents();
     }
 
+    filterNonCompletedTodos = todo => !todo.completed;
+
     createTodo(todoName){
-        let orderNumber = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length + 1;
+        let orderNumber = this.listOfTodos.filter(this.filterNonCompletedTodos).length + 1;
         this.listOfTodos.push(
             new Todo(todoName, orderNumber, false, this)
         );
@@ -30,7 +32,7 @@ class App{
         })
 
         // Lower the order number for all the todos which are above the deleted one
-        this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS)
+        this.listOfTodos.filter(this.filterNonCompletedTodos)
                     .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
                     .map(todo => todo.orderNumber--);
 
@@ -53,11 +55,11 @@ class App{
 
     moveUp(todoId){
         // Get the reuqested todo. Check is it the first element already
-        let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== 1);
+        let todoItem = this.listOfTodos.find((todo, index) => todo.id === todoId && index !== 0);
 
         // Increase the order number for todo which is ahead of the todoItem
         // Decrease the order number for the todoItem
-        if(todoItem !== undefined){
+        if(todoItem){
             let todoItemWithHigherPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber - 1);
             todoItemWithHigherPrio.orderNumber++;
             todoItem.orderNumber--;
@@ -68,14 +70,14 @@ class App{
 
     moveDown(todoId){
         // Get the requested todo. CHeck is it the last element already
-        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length;
+        let numberOfNonCompletedTodos = this.listOfTodos.filter(this.filterNonCompletedTodos).length;
         let todoItem = this.listOfTodos.find(todo => todo.id === todoId && todo.orderNumber !== numberOfNonCompletedTodos);
 
         // Decrease the order number for the todo which is below the todoItem
         // Increase the order number for the todoItem
-        if(todoItem !== undefined){
+        if(todoItem){
             let todoItemWithLowerPrio = this.listOfTodos.find(todo => todo.orderNumber === todoItem.orderNumber + 1);
-            todoItemWithLowerPrio.orderNumber -- ;
+            todoItemWithLowerPrio.orderNumber--;
             todoItem.orderNumber++;
         }
 
@@ -90,19 +92,19 @@ class App{
             inputField.val('');
         });
     
-        $('.todo-items__list').on('click', '.todo__moveup', (event) => {
+        this.todoItemsContainer.on('click', '.todo__moveup', (event) => {
             this.moveUp($(event.target).parent().attr('id'));
         });
     
-        $('.todo-items__list').on('click', '.todo__movedown', (event) => {
+        this.todoItemsContainer.on('click', '.todo__movedown', (event) => {
             this.moveDown($(event.target).parent().attr('id'));
         });
     
-        $('.todo-items__list').on('click', '.todo__complete', (event) => {
+        this.todoItemsContainer.on('click', '.todo__complete', (event) => {
             this.completeTodo($(event.target).parent().attr('id'));
         });
     
-        $('.todo-items__list').on('click', '.todo__delete', (event) => {
+        this.todoItemsContainer.on('click', '.todo__delete', (event) => {
             this.deleteTodo($(event.target).parent().attr('id'));
         });
     }
@@ -114,8 +116,8 @@ class App{
         this.listOfTodos.sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
                     .forEach(item => {
                         item.completed ? 
-                            item.convertCompleteToDOM().appendTo($('#completed-list')) : 
-                            item.convertIncompleteToDOM().appendTo($('#todo-list'));
+                            item.convertCompleteToDOM().appendTo(this.completedTodoContainer) : 
+                            item.convertIncompleteToDOM().appendTo(this.unCompletedTodoContainer);
                     });
     }
 
@@ -123,8 +125,8 @@ class App{
      * Removes all todos from the web application
      */
     resetTheLists(){
-        $('#todo-list').empty();
-        $('#completed-list').empty();
+        this.unCompletedTodoContainer.empty();
+        this.completedTodoContainer.empty();
     }
 
     updateTheList(){

@@ -1,8 +1,8 @@
-'use strict';
+import {Utils} from './utils.js';
 
 export class Todo{
     constructor(name, orderNumber, completed, app){
-        this.id = create_UUID();
+        this.id = Utils.create_UUID();
         this.name = name;
         this.orderNumber = orderNumber;
         this.completed = completed;
@@ -31,12 +31,3 @@ export class Todo{
     }
 }
 
-function create_UUID(){
-    var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (dt + Math.random()*16)%16 | 0;
-        dt = Math.floor(dt/16);
-        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-}
