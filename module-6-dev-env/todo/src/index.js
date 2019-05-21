@@ -1,6 +1,5 @@
-'use strict';
-
 import {Todo} from './todo.js';
+import './app.scss';
 
 class App{
     constructor(listOfTodos){
