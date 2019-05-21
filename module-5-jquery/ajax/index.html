@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/app.css">
+    <title>Weather :: Ajax calls</title>
+</head>
+<body>
+    <div class="loader">
+        <div class="loader__spinner"></div>
+    </div>
+    <header>
+        <section class="wide center">
+            <form id="search">
+                <input id="city" type="text" placeholder="enter city name...">
+            </form>
+        </section>
+    </header>
+    <main>
+        <section id="countries" class="wide center">
+        </section>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
