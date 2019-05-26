@@ -1,5 +1,6 @@
 import {Todo} from './todo.js';
 import './app.scss';
+import metadata from './metadata.xml';
 
 class App{
     constructor(listOfTodos){
@@ -7,6 +8,11 @@ class App{
         this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
 
         this.bindEvents();
+        this.printMetadataOnTheConsole();
+    }
+
+    printMetadataOnTheConsole(){
+        console.log(metadata);
     }
 
     createTodo(todoName){
