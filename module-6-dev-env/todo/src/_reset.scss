@@ -1,8 +1,11 @@
+* {
+    box-sizing: border-box;
+    font-family: 'my-font';
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
     background: radial-gradient($background-color-inner, $background-color-outer);
     height: 100vh;
     background-repeat: no-repeat;
