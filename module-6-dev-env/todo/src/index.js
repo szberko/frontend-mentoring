@@ -1,5 +1,6 @@
 import {Todo} from './todo.js';
 import './app.scss';
+import logo from './logo.png';
 
 class App{
     constructor(listOfTodos){
