@@ -7,6 +7,10 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    },
     entry: {
         app: './src/index.js'
     },
@@ -61,6 +65,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery'
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
