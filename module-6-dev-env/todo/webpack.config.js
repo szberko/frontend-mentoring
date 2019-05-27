@@ -1,11 +1,14 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: {
+        app: './src/index.js'
+    },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -46,6 +49,9 @@ module.exports = {
     plugins:[
         new MiniCssExtractPlugin({
             filename: 'app.bundle.css'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'TODO app'
         })
     ]
 };
