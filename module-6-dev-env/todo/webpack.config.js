@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     mode: 'development',
@@ -51,7 +52,12 @@ module.exports = {
             filename: 'app.bundle.css'
         }),
         new HtmlWebpackPlugin({
-            title: 'TODO app'
+            title: 'TODO app',
+            template: 'src/index.html'
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ]
 };
