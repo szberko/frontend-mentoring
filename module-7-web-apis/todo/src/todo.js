@@ -1,10 +1,30 @@
 export class Todo{
-    constructor(name, orderNumber, completed, app){
-        this.id = create_UUID();
+    constructor(id, name, orderNumber, completed, app){
+        this.id = id;
         this.name = name;
         this.orderNumber = orderNumber;
         this.completed = completed;
         this.app = app;
+    }
+
+    static createBrandNewTodo(name, orderNumber, completed, app){
+        return new Todo(
+            create_UUID(),
+            name,
+            orderNumber,
+            completed,
+            app
+        );
+    }
+
+    static createTodoFromJSON(jsonObject){
+        return new Todo(
+            jsonObject.id,
+            jsonObject.name,
+            jsonObject.orderNumber,
+            jsonObject.completed,
+            jsonObject.app
+        );
     }
 
     convertIncompleteToDOM(){
@@ -31,7 +51,7 @@ export class Todo{
 
 function create_UUID(){
     var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var uuid = 'todo-xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = (dt + Math.random()*16)%16 | 0;
         dt = Math.floor(dt/16);
         return (c=='x' ? r :(r&0x3|0x8)).toString(16);
