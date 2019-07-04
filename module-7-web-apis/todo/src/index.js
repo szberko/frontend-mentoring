@@ -4,6 +4,7 @@ import metadata from './metadata.xml';
 
 class App{
     constructor(listOfTodos){
+        window.localStorage.clear();
         this.listOfTodos = listOfTodos;
         this.GET_NON_COMPLETED_TODOS = todo => !todo.completed;
 
@@ -15,29 +16,64 @@ class App{
         console.log(metadata);
     }
 
+    getNonCompletedTodoList(){
+        let listOfTodos = Object.keys(window.localStorage)
+            .filter(key => key.startsWith("todo-"))
+            .map(key => Todo.createTodoFromJSON(JSON.parse(window.localStorage.getItem(key))))
+            .filter(todo => !todo.completed);
+        console.log(listOfTodos);
+        return listOfTodos; 
+    }
+
+    getNonCompletedTodoListSize(){
+        return window.localStorage.length;
+    }
+
+    pushNewTodo(todo){
+        return window.localStorage.setItem(todo.id, JSON.stringify(todo));
+    }
+
+    deleteTodoFromStorage(todoId){
+        window.localStorage.removeItem(todoId);
+    }
+
+    getCompletedTodoList(){
+        let listOfTodos = Object.keys(window.localStorage)
+            .filter(key => key.startsWith("todo-"))
+            .map(key => Todo.createTodoFromJSON(JSON.parse(window.localStorage.getItem(key))))
+            .filter(todo => todo.completed);
+        console.log(listOfTodos);
+        return listOfTodos; 
+    }
+
+    // updateCompletedTodoList(todos){
+    //     return window.localStorage.setItem("completed", JSON.stringify(todos));
+    // }
+
     createTodo(todoName){
-        let orderNumber = this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS).length + 1;
-        this.listOfTodos.push(
-            new Todo(todoName, orderNumber, false, this)
-        );
+        let orderNumber = this.getNonCompletedTodoListSize() + 1;
+        let newTodo = Todo.createBrandNewTodo(todoName, orderNumber, false, this);
+        this.pushNewTodo(newTodo);
         this.updateTheList();
     }
 
     deleteTodo(todoId){
-        let orderNumberOfDeletedTodo;
-        // Remove todo from the list of todos
-        this.listOfTodos.forEach( (todoToBeDeleted, index) => {
-            if(todoToBeDeleted.id === todoId){
-                orderNumberOfDeletedTodo = todoToBeDeleted.orderNumber;
-                this.listOfTodos.splice(index, 1);
-                return;
-            }
-        })
+        this.deleteTodoFromStorage(todoId);
 
-        // Lower the order number for all the todos which are above the deleted one
-        this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS)
-                    .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
-                    .map(todo => todo.orderNumber--);
+        // let orderNumberOfDeletedTodo;
+        // // Remove todo from the list of todos
+        // this.listOfTodos.forEach( (todoToBeDeleted, index) => {
+        //     if(todoToBeDeleted.id === todoId){
+        //         orderNumberOfDeletedTodo = todoToBeDeleted.orderNumber;
+        //         this.listOfTodos.splice(index, 1);
+        //         return;
+        //     }
+        // })
+
+        // // Lower the order number for all the todos which are above the deleted one
+        // this.listOfTodos.filter(this.GET_NON_COMPLETED_TODOS)
+        //             .filter(todo => todo.orderNumber > orderNumberOfDeletedTodo)
+        //             .map(todo => todo.orderNumber--);
 
         this.updateTheList();
     }
@@ -116,12 +152,12 @@ class App{
      * Populate the web application with already created todos
      */
     fillTheLists(){
-        this.listOfTodos.sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
-                    .forEach(item => {
-                        item.completed ? 
-                            item.convertCompleteToDOM().appendTo($('#completed-list')) : 
-                            item.convertIncompleteToDOM().appendTo($('#todo-list'));
-                    });
+        this.getNonCompletedTodoList()
+                    .sort( (todo1, todo2) => todo1.orderNumber - todo2.orderNumber )
+                    .forEach(item => item.convertIncompleteToDOM().appendTo($('#todo-list')));
+
+        this.getCompletedTodoList()
+                    .forEach( item => item.convertCompleteToDOM().appendTo($('#completed-list')));
     }
 
     /**
