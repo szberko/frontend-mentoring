@@ -1,19 +1,17 @@
 export class Todo{
-    constructor(id, name, orderNumber, completed, app){
+    constructor(id, name, orderNumber, completed){
         this.id = id;
         this.name = name;
         this.orderNumber = orderNumber;
         this.completed = completed;
-        this.app = app;
     }
 
-    static createBrandNewTodo(name, orderNumber, completed, app){
+    static createBrandNewTodo(name, orderNumber, completed){
         return new Todo(
             create_UUID(),
             name,
             orderNumber,
-            completed,
-            app
+            completed
         );
     }
 
@@ -22,8 +20,7 @@ export class Todo{
             jsonObject.id,
             jsonObject.name,
             jsonObject.orderNumber,
-            jsonObject.completed,
-            jsonObject.app
+            jsonObject.completed
         );
     }
 
