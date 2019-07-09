@@ -24,6 +24,16 @@ export class Storage{
         .map(key => Todo.createTodoFromJSON(JSON.parse(window.localStorage.getItem(key))));
     }
 
+    static isFirstTodo(todoId){
+        let firstTodo = this.getNonCompletedTodoList().reduce( (prev, curr) => prev.orderNumber < curr.orderNumber ? prev : curr);
+        return firstTodo.id === todoId;
+    }
+
+    static isLastTodo(todoId){
+        let lastTodo = this.getNonCompletedTodoList().reduce( (prev, curr) => prev.orderNumber > curr.orderNumber ? prev : curr);
+        return lastTodo.id === todoId;
+    }
+
     static getTodo(todoId){
         return Todo.createTodoFromJSON(JSON.parse(window.localStorage.getItem(todoId)));
     }

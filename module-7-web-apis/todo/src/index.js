@@ -30,39 +30,33 @@ class App{
     }
 
     moveUp(todoId){
-        // Get the reuqested todo. Check is it the first element already
-        let todoItem = Storage.getNonCompletedTodoList().find(todo => todo.id === todoId && todo.orderNumber !== 1);
-
         // Increase the order number for todo which is ahead of the todoItem
         // Decrease the order number for the todoItem
-        if(todoItem !== undefined){
+        if(!Storage.isFirstTodo(todoId)){
+            let todoItem = Storage.getTodo(todoId);
             let todoItemWithHigherPrio = Storage.getNonCompletedTodoList().find(todo => todo.orderNumber === todoItem.orderNumber - 1);
             todoItemWithHigherPrio.orderNumber++;
             todoItem.orderNumber--;
 
             Storage.pushTodo(todoItemWithHigherPrio);
             Storage.pushTodo(todoItem);
+            this.updateTheList();
         }
-
-        this.updateTheList();
     }
 
     moveDown(todoId){
-        // Get the requested todo. CHeck is it the last element already
-        let todoItem = Storage.getNonCompletedTodoList().find(todo => todo.id === todoId);
-
         // Decrease the order number for the todo which is below the todoItem
         // Increase the order number for the todoItem
-        if(todoItem !== undefined){
+        if(!Storage.isLastTodo(todoId)){
+            let todoItem = Storage.getTodo(todoId);
             let todoItemWithLowerPrio = Storage.getNonCompletedTodoList().find(todo => todo.orderNumber === todoItem.orderNumber + 1);
             todoItemWithLowerPrio.orderNumber -- ;
             todoItem.orderNumber++;
 
             Storage.pushTodo(todoItemWithLowerPrio);
             Storage.pushTodo(todoItem);
+            this.updateTheList();
         }
-
-        this.updateTheList();
     }
 
     bindEvents(){
@@ -119,7 +113,5 @@ class App{
         this.fillTheLists();
     }
 }
-
-
 
 $('document').ready( () => new App());
