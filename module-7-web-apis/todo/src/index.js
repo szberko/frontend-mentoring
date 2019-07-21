@@ -1,5 +1,5 @@
 import {Todo} from './todo.js';
-import './app.scss';
+import './scss/app.scss';
 import {Storage} from './localStorageHelper.js';
 
 class App{
